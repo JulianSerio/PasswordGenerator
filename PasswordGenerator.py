@@ -7,106 +7,27 @@ import tkinter.ttk as ttk
 
 #GENERATE 
 def generatePassword():
-    minusculas = "abcdefghijklmnopqrstuvwxyz"
-    mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    numeros = "0123456789"
-    simbolos = "`~!@#$%^&*()-=]}{[]\|':;,.></?"
-    ans = ""
-    if (mayus.get()==1):    #IF mayus IS PRESSED 
-        ans = ans + mayusculas  #ADD mayusculas
-        if (minus.get()==1):        #IF minus IS PRESSED 
-            ans = ans + minusculas     #ADD minuscula   
-            if (numb.get()==1):            #IF numb IS PRESSED
-                ans = ans + numeros           #ADD numeros
-            elif (simb.get()==1):          #ELSE
-                ans = ans + simbolos          #ADD simbolos
-                 
-        elif (numb.get()==1):
-            ans = ans + numeros 
-            if (minus.get()==1):
-                ans = ans + minusculas  
-            elif (simb.get()==1):
-                ans = ans + simbolos
+    length = length.get()  # Obtener la longitud deseada de la contraseña
+    options = ''
 
-        elif (simb.get()==1):
-            ans = ans + simbolos 
-            if (numb.get()==1):
-                    ans = ans + numeros     
-            elif (minus.get()==1):
-                ans = ans + minusculas
+    # Construir las opciones de caracteres basadas en las selecciones del usuario
+    if mayus.get():
+        options += string.ascii_uppercase
+    if minus.get():
+        options += string.ascii_lowercase
+    if numb.get():
+        options += string.digits
+    if simb.get():
+        options += string.punctuation
 
-    elif (minus.get()==1):
-        ans = ans + minusculas 
-        if (mayus.get()==1):
-            ans = ans + mayusculas
-            if (numb.get()==1):
-                ans = ans + numeros     
-            elif (simb.get()==1):
-                ans = ans + simbolos 
+    # Generar la contraseña aleatoria
+    if options:
+        password = ''.join(random.choices(options, k=length))
+    else:
+        # Si no se selecciona ninguna opción, usar todos los caracteres
+        password = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=length))
 
-        elif (numb.get()==1):
-            ans = ans + numeros
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (simb.get()==1):
-                ans = ans + simbolos 
-
-        elif (simb.get()==1):
-            ans = ans + simbolos 
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (numb.get()==1):
-                ans = ans + numeros     
-
-    elif (numb.get()==1):
-        ans = ans + numeros
-        if (minus.get()==1):
-            ans = ans + minusculas
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (simb.get()==1):
-                ans = ans + simbolos
-
-        elif (mayus.get()==1):
-            ans = ans + mayusculas
-            if (minus.get()==1):
-                ans = ans + minusculas
-            elif (simb.get()==1):
-                ans = ans + simbolos 
-
-        elif (simb.get()==1):
-            ans = ans + simbolos 
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (minus.get()==1):
-                ans = ans + minusculas
-
-    elif (simb.get()==1):
-        ans = ans + simbolos
-        if (numb.get()==1):
-            ans = ans + numeros 
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (minus.get()==1):
-                ans = ans + minusculas
-        elif (minus.get()==1):
-            ans = ans + minusculas
-            if (mayus.get()==1):
-                ans = ans + mayusculas
-            elif (numb.get()==1):
-                ans = ans + numeros  
-
-        elif (mayus.get()==1):
-            ans = ans + mayusculas 
-            if (numb.get()==1):
-                ans = ans + numeros     
-            elif (minus.get()==1):
-                ans = ans + minusculas
-    else:   
-        ans = minusculas + mayusculas + numeros + simbolos
-        
-    ans = "".join(random.sample(ans,length.get())) #RANDOMIZE
-    etiqueta = password.set(ans) #MOSTRAR
+    etiqueta = password.set(password)  # Mostrar la contraseña generada
     
 #FUNCTION TO COPY
 def copy(): 
